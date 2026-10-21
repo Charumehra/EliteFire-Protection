@@ -1,8 +1,8 @@
 /**
  * Elite Fire and Protection - Centralized Business Configuration
  *
- * NOTE: For missing company information, clear placeholders are used.
- * Never invent certifications, government approvals, or addresses.
+ * Primary Branding Reference: Official Company Logo (Obsidian Black & Crimson Safety Red)
+ * Visual Assets: /images/elite-logo.jpeg & /images/elite-shield-icon.png
  */
 
 export interface ServiceArea {
@@ -15,9 +15,18 @@ export interface ServiceArea {
 export const BUSINESS_CONFIG = {
   name: 'Elite Fire and Protection',
   legalName: 'Elite Fire and Protection Services',
-  tagline: 'Life Safety, Fire Protection & Facility Maintenance Solutions',
+  tagline: 'SAFETY | PROTECTION | RELIABILITY',
+  subtitle: 'Industrial & Commercial Fire Safety, Suppression & AMC Solutions',
 
-  // Contact Information (Configurable Placeholders)
+  // Visual Branding Assets
+  branding: {
+    logoPath: '/images/elite-logo.jpeg',
+    shieldIconPath: '/images/elite-shield-icon.png',
+    primaryColorHex: '#dc2626', // Flame Safety Red from logo
+    darkBackgroundHex: '#0a0a0c', // Obsidian Dark from logo
+  },
+
+  // Contact Information (Centralized)
   phone: {
     display: '+91 98XXX XXXXX',
     raw: '+919800000000', // tel: format
@@ -25,9 +34,9 @@ export const BUSINESS_CONFIG = {
   },
   whatsapp: {
     display: '+91 98XXX XXXXX',
-    raw: '919800000000', // International number without symbols for WhatsApp api link
+    raw: '919800000000', // Official international format without symbols
     defaultMessage:
-      'Hello Elite Fire and Protection, I would like to enquire about your fire safety services in Faridabad/Delhi NCR. Please share details.',
+      'Hello Elite Fire and Protection, I would like to enquire about your fire safety services in Faridabad/Delhi NCR. Please share details and quotation.',
     isPlaceholder: true,
   },
   email: {
@@ -39,8 +48,8 @@ export const BUSINESS_CONFIG = {
   // Operating Hours
   hours: {
     regular: 'Monday – Saturday: 9:00 AM – 7:00 PM',
-    sunday: 'Sunday: Emergency Service / By Appointment',
-    emergencyAvailabilityNote: 'Urgent breakdown support available for active AMC contract holders',
+    sunday: 'Sunday: Emergency Callouts / By Appointment',
+    emergencyAvailabilityNote: 'Urgent breakdown service available for active AMC contract holders',
   },
 
   // Physical Location & Service Coverage
@@ -64,7 +73,7 @@ export const BUSINESS_CONFIG = {
         'Sector 58 Industrial Area',
         'Sector 59 Industrial Area',
         'Sector 24 & 25 Industrial Area',
-        'IMT Faridabad',
+        'IMT Faridabad (Industrial Model Township)',
         'Mathura Road Commercial Corridor',
         'Neharpar (Greater Faridabad)',
         'NIT Faridabad',
@@ -73,10 +82,10 @@ export const BUSINESS_CONFIG = {
     {
       name: 'Delhi NCR',
       isPrimary: false,
-      description: 'Selective service coverage for commercial complexes, corporate offices, and factories.',
+      description: 'Dedicated commercial service coverage for corporate complexes, IT towers, and manufacturing facilities.',
       keyHubs: [
         'Okhla Industrial Area (Phases I, II, III)',
-        'Gurugram Commercial & Cyber City Hubs',
+        'Gurugram Commercial & Cyber City Belts',
         'Noida & Greater Noida Industrial Sectors',
         'Mohan Cooperative Industrial Estate',
         'South Delhi Commercial Facilities',
@@ -93,11 +102,11 @@ export const BUSINESS_CONFIG = {
     { code: 'NBC 2016', label: 'National Building Code of India (Part 4: Fire and Life Safety)' },
   ],
 
-  // Placeholder Notices
+  // Disclaimers
   disclaimers: {
     statutoryNotice:
-      'Elite Fire and Protection installs and services systems designed in accordance with relevant Indian Standards (IS Codes) and the National Building Code (NBC). Statutory Fire NOC issuance is subject to the sole jurisdiction of state fire service authorities.',
+      'Elite Fire and Protection installs and services systems designed in accordance with relevant Indian Standards (IS Codes) and the National Building Code (NBC 2016). Statutory Fire NOC issuance is subject to the sole jurisdiction of state fire service authorities following their formal site inspection.',
     portfolioNotice:
-      'Case study layouts displayed illustrate typical project capabilities and equipment configurations. Specific past client references are furnished during formal proposal submissions upon mutual nondisclosure.',
+      'Project configurations and layout case studies displayed illustrate typical system capabilities and engineering standards. Specific past client references are furnished during formal proposal submissions upon mutual nondisclosure.',
   },
 };

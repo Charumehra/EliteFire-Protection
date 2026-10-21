@@ -12,10 +12,10 @@ export function getWhatsAppUrl(customMessage?: string): string {
 }
 
 /**
- * Service-specific WhatsApp message generator
+ * Service-specific WhatsApp message generator with contextual intent
  */
 export function getServiceWhatsAppUrl(serviceTitle: string, location?: string): string {
-  const loc = location ? ` in ${location}` : ' in Faridabad / Delhi NCR';
-  const msg = `Hello Elite Fire and Protection, I would like to inquire about your "${serviceTitle}" services${loc}. Please share quotation details and technical specifications.`;
+  const targetArea = location || 'Faridabad / Delhi NCR';
+  const msg = `Hello Elite Fire and Protection, I am interested in "${serviceTitle}" in ${targetArea}. Please contact me to discuss my requirements and quotation.`;
   return getWhatsAppUrl(msg);
 }

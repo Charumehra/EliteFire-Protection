@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { z } from 'zod';
-import { Send, AlertCircle, CheckCircle2, MessageCircle, Phone } from 'lucide-react';
+import { Send, CheckCircle2, Phone, AlertCircle, ArrowRight } from 'lucide-react';
 import { trackConversion } from '../utils/analytics';
 import { BUSINESS_CONFIG } from '../config/businessConfig';
 
@@ -53,8 +53,8 @@ export const QuoteForm: React.FC<QuoteFormProps> = ({
   });
 
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
-  const [submitting, setSubmitting] = useState(false);
-  const [successLeadId, setSuccessLeadId] = useState<string | null>(null);
+  const [readyForWhatsApp, setReadyForWhatsApp] = useState<boolean>(false);
+  const [quoteRefId, setQuoteRefId] = useState<string>('');
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
@@ -71,20 +71,25 @@ export const QuoteForm: React.FC<QuoteFormProps> = ({
   };
 
   const generateWhatsAppMessage = () => {
-    return (
-      `*NEW QUOTE INQUIRY - ELITE FIRE AND PROTECTION*%0A` +
-      `---------------------------------------%0A` +
-      `*Name:* ${encodeURIComponent(formData.name)}%0A` +
-      `*Company:* ${encodeURIComponent(formData.companyName || 'Not specified')}%0A` +
-      `*Phone:* ${encodeURIComponent(formData.phone)}%0A` +
-      `*Email:* ${encodeURIComponent(formData.email || 'Not specified')}%0A` +
-      `*Service Required:* ${encodeURIComponent(formData.service)}%0A` +
-      `*Site Location:* ${encodeURIComponent(formData.location)}%0A` +
-      `*Preferred Contact:* ${encodeURIComponent(formData.preferredContactMethod)}%0A` +
-      `*Scope/Notes:* ${encodeURIComponent(formData.message || 'No additional notes')}%0A` +
-      `---------------------------------------%0A` +
-      `_Submitted via Elite Fire & Protection Website_`
-    );
+    const lines = [
+      `*NEW INQUIRY - ELITE FIRE AND PROTECTION*`,
+      `Reference ID: ${quoteRefId}`,
+      `---------------------------------------`,
+      `*Full Name:* ${formData.name}`,
+      formData.companyName ? `*Company/Facility:* ${formData.companyName}` : '',
+      `*Mobile Number:* ${formData.phone}`,
+      formData.email ? `*Email:* ${formData.email}` : '',
+      `*Service Required:* ${formData.service}`,
+      `*Site Location:* ${formData.location}`,
+      `*Preferred Contact:* ${formData.preferredContactMethod}`,
+      formData.message ? `*Project Scope / Notes:* ${formData.message}` : '',
+      `---------------------------------------`,
+      `_Inquiry initiated from official website_`,
+    ]
+      .filter(Boolean)
+      .join('\n');
+
+    return encodeURIComponent(lines);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -109,76 +114,93 @@ export const QuoteForm: React.FC<QuoteFormProps> = ({
       return;
     }
 
-    setSubmitting(true);
+    const newId = 'EFP-' + Math.floor(100000 + Math.random() * 900000);
+    setQuoteRefId(newId);
 
-    // Static mode persistence: store in localStorage
-    const leadId = 'EFP-' + Math.floor(100000 + Math.random() * 900000);
-    const existing = JSON.parse(localStorage.getItem('elite_leads') || '[]');
-    existing.unshift({
-      id: leadId,
-      ...formData,
-      timestamp: new Date().toISOString(),
-    });
-    localStorage.setItem('elite_leads', JSON.stringify(existing));
+    // Save lead record locally for the admin viewer
+    try {
+      const existing = JSON.parse(localStorage.getItem('elite_leads') || '[]');
+      existing.unshift({
+        id: newId,
+        ...formData,
+        timestamp: new Date().toISOString(),
+      });
+      localStorage.setItem('elite_leads', JSON.stringify(existing));
+    } catch {
+      // Storage fallback
+    }
 
     trackConversion('quote_form_submit_success', {
       service: formData.service,
       location: formData.location,
-      leadId,
+      leadId: newId,
     });
 
-    setSuccessLeadId(leadId);
-    setSubmitting(false);
+    setReadyForWhatsApp(true);
 
     if (onSuccess) {
-      onSuccess(leadId);
+      onSuccess(newId);
     }
   };
 
-  if (successLeadId) {
+  if (readyForWhatsApp) {
     const waUrl = `https://wa.me/${BUSINESS_CONFIG.whatsapp.raw}?text=${generateWhatsAppMessage()}`;
 
     return (
-      <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-6 sm:p-8 text-center animate-fadeIn">
-        <div className="w-14 h-14 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4">
-          <CheckCircle2 className="w-8 h-8" />
+      <div className="bg-[#0e0e12] border border-safety-600/30 rounded-xl p-6 sm:p-7 text-white text-center animate-fadeIn shadow-2xl">
+        <div className="w-12 h-12 bg-safety-600/20 text-safety-500 rounded-full flex items-center justify-center mx-auto mb-3">
+          <CheckCircle2 className="w-7 h-7" />
         </div>
-        <h3 className="text-xl font-bold text-navy-900 mb-2">Quote Request Prepared!</h3>
-        <p className="text-sm text-slate-600 mb-4 leading-relaxed">
-          Thank you, <strong>{formData.name}</strong>. Your inquiry for <strong>{formData.service}</strong> in <strong>{formData.location}</strong> has been logged.
+        <h3 className="text-lg font-bold text-white mb-1">Quote Inquiry Prepared!</h3>
+        <p className="text-xs text-slate-300 mb-3 leading-relaxed">
+          Inquiry reference for <strong>{formData.name}</strong> ({formData.service} &bull; {formData.location}) is ready.
         </p>
 
-        <div className="bg-white rounded-lg p-3 border border-emerald-200 inline-block text-xs text-slate-500 mb-6">
-          Reference Quote ID: <code className="font-mono font-bold text-navy-900">{successLeadId}</code>
+        {/* Clear Explanation that user will be redirected */}
+        <div className="bg-[#16161c] border border-slate-800 rounded-lg p-3 text-left mb-5 space-y-1 text-xs text-slate-300">
+          <p className="font-semibold text-safety-400 flex items-center gap-1.5">
+            <span>Next Step: Send via WhatsApp</span>
+          </p>
+          <p className="text-[11px] text-slate-400 leading-normal">
+            Clicking the button below will open WhatsApp in a new tab with your pre-filled inquiry. You can review the details and press send directly to our team.
+          </p>
         </div>
 
-        {/* Immediate WhatsApp Send Button */}
-        <div className="space-y-3">
+        {/* Continue on WhatsApp Action */}
+        <div className="space-y-2.5">
           <a
             href={waUrl}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={() => trackConversion('whatsapp_click', { category: 'Quote Form', label: 'Send via WhatsApp' })}
-            className="w-full inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm py-3 px-6 rounded-lg shadow-md transition-colors"
+            onClick={() => trackConversion('whatsapp_click', { category: 'Quote Form', label: 'Continue on WhatsApp' })}
+            className="w-full inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-sm py-3 px-4 rounded-lg shadow-lg shadow-[#25D366]/20 transition-all transform hover:-translate-y-0.5"
           >
-            <MessageCircle className="w-5 h-5" />
-            <span>Send Directly to WhatsApp for Immediate Quote</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              className="w-5 h-5 flex-shrink-0"
+            >
+              <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.03-1.25-.75-.67-1.26-1.5-1.41-1.75-.15-.25-.02-.39.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.44.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.07-.12-.23-.19-.48-.31" />
+            </svg>
+            <span>Continue on WhatsApp to Send Inquiry</span>
+            <ArrowRight className="w-4 h-4" />
           </a>
 
           <a
             href={`tel:${BUSINESS_CONFIG.phone.raw}`}
-            className="w-full inline-flex items-center justify-center gap-2 bg-navy-900 hover:bg-navy-800 text-white font-bold text-xs py-2.5 px-4 rounded-lg transition-colors"
+            className="w-full inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/15 text-white font-bold text-xs py-2.5 px-3 rounded-lg transition-colors"
           >
-            <Phone className="w-4 h-4 text-safety-500" />
-            <span>Or Call Our Engineers: {BUSINESS_CONFIG.phone.display}</span>
+            <Phone className="w-3.5 h-3.5 text-safety-500" />
+            <span>Or Call Direct: {BUSINESS_CONFIG.phone.display}</span>
           </a>
         </div>
 
-        <div className="mt-5">
+        <div className="mt-4 pt-3 border-t border-slate-800">
           <button
             type="button"
             onClick={() => {
-              setSuccessLeadId(null);
+              setReadyForWhatsApp(false);
               setFormData({
                 name: '',
                 companyName: '',
@@ -191,9 +213,9 @@ export const QuoteForm: React.FC<QuoteFormProps> = ({
                 website_hp: '',
               });
             }}
-            className="text-xs font-semibold text-slate-500 hover:text-safety-600 underline"
+            className="text-[11px] font-semibold text-slate-400 hover:text-safety-400 underline"
           >
-            Submit Another Inquiry
+            Start a New Inquiry
           </button>
         </div>
       </div>
@@ -230,7 +252,7 @@ export const QuoteForm: React.FC<QuoteFormProps> = ({
             value={formData.name}
             onChange={handleChange}
             placeholder="e.g. Ramesh Kumar"
-            className={`w-full text-sm px-3.5 py-2.5 rounded-lg border bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-safety-500 transition-colors ${
+            className={`w-full text-xs sm:text-sm px-3.5 py-2.5 rounded-lg border bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-safety-500 transition-colors ${
               fieldErrors.name ? 'border-red-400 bg-red-50' : 'border-slate-300'
             }`}
           />
@@ -249,7 +271,7 @@ export const QuoteForm: React.FC<QuoteFormProps> = ({
             value={formData.companyName}
             onChange={handleChange}
             placeholder="e.g. Apex Auto Components / Society"
-            className="w-full text-sm px-3.5 py-2.5 rounded-lg border border-slate-300 bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-safety-500"
+            className="w-full text-xs sm:text-sm px-3.5 py-2.5 rounded-lg border border-slate-300 bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-safety-500"
           />
         </div>
       </div>
@@ -268,7 +290,7 @@ export const QuoteForm: React.FC<QuoteFormProps> = ({
             value={formData.phone}
             onChange={handleChange}
             placeholder="e.g. 9812345678"
-            className={`w-full text-sm px-3.5 py-2.5 rounded-lg border bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-safety-500 transition-colors ${
+            className={`w-full text-xs sm:text-sm px-3.5 py-2.5 rounded-lg border bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-safety-500 transition-colors ${
               fieldErrors.phone ? 'border-red-400 bg-red-50' : 'border-slate-300'
             }`}
           />
@@ -287,7 +309,7 @@ export const QuoteForm: React.FC<QuoteFormProps> = ({
             value={formData.email}
             onChange={handleChange}
             placeholder="e.g. ramesh@apex.com"
-            className={`w-full text-sm px-3.5 py-2.5 rounded-lg border bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-safety-500 ${
+            className={`w-full text-xs sm:text-sm px-3.5 py-2.5 rounded-lg border bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-safety-500 ${
               fieldErrors.email ? 'border-red-400 bg-red-50' : 'border-slate-300'
             }`}
           />
@@ -306,7 +328,7 @@ export const QuoteForm: React.FC<QuoteFormProps> = ({
             name="service"
             value={formData.service}
             onChange={handleChange}
-            className="w-full text-sm px-3.5 py-2.5 rounded-lg border border-slate-300 bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-safety-500"
+            className="w-full text-xs sm:text-sm px-3.5 py-2.5 rounded-lg border border-slate-300 bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-safety-500"
           >
             {VALID_SERVICES.map((s) => (
               <option key={s} value={s}>
@@ -330,7 +352,7 @@ export const QuoteForm: React.FC<QuoteFormProps> = ({
             value={formData.location}
             onChange={handleChange}
             placeholder="e.g. Sector 58 Faridabad / Okhla"
-            className={`w-full text-sm px-3.5 py-2.5 rounded-lg border bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-safety-500 ${
+            className={`w-full text-xs sm:text-sm px-3.5 py-2.5 rounded-lg border bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-safety-500 ${
               fieldErrors.location ? 'border-red-400 bg-red-50' : 'border-slate-300'
             }`}
           />
@@ -349,7 +371,7 @@ export const QuoteForm: React.FC<QuoteFormProps> = ({
               key={method}
               className={`flex items-center justify-center gap-1.5 py-2 px-2 border rounded-lg text-xs font-medium cursor-pointer transition-colors ${
                 formData.preferredContactMethod === method
-                  ? 'border-safety-600 bg-safety-50 text-safety-700 font-semibold'
+                  ? 'border-safety-600 bg-red-50 text-safety-700 font-semibold'
                   : 'border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100'
               }`}
             >
@@ -379,21 +401,20 @@ export const QuoteForm: React.FC<QuoteFormProps> = ({
           value={formData.message}
           onChange={handleChange}
           placeholder="Specify floor area, number of extinguishers, new setup vs AMC maintenance, or urgency..."
-          className="w-full text-sm px-3.5 py-2 rounded-lg border border-slate-300 bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-safety-500"
+          className="w-full text-xs sm:text-sm px-3.5 py-2 rounded-lg border border-slate-300 bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-safety-500"
         />
       </div>
 
       <button
         type="submit"
-        disabled={submitting}
-        className="w-full bg-safety-600 hover:bg-safety-700 text-white font-bold text-sm py-3 px-6 rounded-lg shadow-md transition-all duration-150 transform hover:-translate-y-0.5 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+        className="w-full bg-safety-600 hover:bg-safety-700 text-white font-bold text-xs sm:text-sm py-3 px-6 rounded-lg shadow-md transition-all duration-150 transform hover:-translate-y-0.5 flex items-center justify-center gap-2"
       >
         <Send className="w-4 h-4" />
-        <span>Submit Quotation Request</span>
+        <span>Review & Prepare WhatsApp Quote Request</span>
       </button>
 
       <p className="text-[11px] text-slate-500 text-center leading-normal">
-        Your information is protected and used strictly to deliver your quotation. No spam.
+        Your information is protected and used strictly to deliver your quotation. You will review the message before sending on WhatsApp.
       </p>
     </form>
   );

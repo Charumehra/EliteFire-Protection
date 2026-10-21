@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
-import { X, Flame } from 'lucide-react';
+import { X } from 'lucide-react';
 import { QuoteForm } from './QuoteForm';
+import { BUSINESS_CONFIG } from '../config/businessConfig';
 
 interface QuoteModalProps {
   isOpen: boolean;
@@ -35,24 +36,26 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
 
   return (
     <div
-      className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/70 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6"
+      className="fixed inset-0 z-50 overflow-y-auto bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6"
       role="dialog"
       aria-modal="true"
       aria-labelledby="modal-headline"
     >
-      <div className="relative bg-white rounded-2xl shadow-2xl max-w-xl w-full p-6 sm:p-8 overflow-hidden border border-slate-100 animate-fadeIn">
+      <div className="relative bg-white rounded-2xl shadow-2xl max-w-xl w-full p-6 sm:p-7 overflow-hidden border border-slate-200 animate-fadeIn text-slate-900">
         {/* Header */}
         <div className="flex justify-between items-start pb-4 border-b border-slate-100">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-safety-600 rounded-lg flex items-center justify-center text-white">
-              <Flame className="w-6 h-6" />
-            </div>
+            <img
+              src={BUSINESS_CONFIG.branding.shieldIconPath}
+              alt="Elite Shield"
+              className="w-10 h-10 object-contain rounded bg-[#0a0a0c] p-1"
+            />
             <div>
-              <h2 id="modal-headline" className="text-xl font-bold text-navy-900">
+              <h2 id="modal-headline" className="text-lg sm:text-xl font-bold text-navy-900">
                 Request a Fire Safety Quotation
               </h2>
               <p className="text-xs text-slate-500">
-                Fast estimates for commercial, industrial & residential facilities
+                Direct estimates for commercial, industrial & residential facilities
               </p>
             </div>
           </div>
