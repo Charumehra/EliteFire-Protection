@@ -23,11 +23,11 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-slate-800">
           {/* Col 1: Brand & Official Logo */}
           <div className="space-y-4">
-            <Link to="/" className="inline-block">
+            <Link to="/" className="inline-block bg-white px-3 py-2 rounded-xl shadow-sm transition-transform duration-200 hover:scale-[1.02]">
               <img
                 src={BUSINESS_CONFIG.branding.logoPath}
                 alt="Elite Fire and Protection - Safety, Protection, Reliability"
-                className="h-12 w-auto object-contain"
+                className="h-10 sm:h-11 w-auto object-contain"
               />
             </Link>
             <p className="text-xs font-bold tracking-widest text-safety-500 uppercase">

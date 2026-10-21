@@ -50,7 +50,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
             <img
               src={BUSINESS_CONFIG.branding.shieldIconPath}
               alt="Elite Shield"
-              className="w-10 h-10 object-contain rounded bg-[#0a0a0c] p-1"
+              className="w-10 h-10 object-contain"
             />
             <div>
               <h2 id="modal-headline" className="text-lg sm:text-xl font-bold text-navy-900">

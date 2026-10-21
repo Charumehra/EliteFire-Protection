@@ -20,7 +20,7 @@ export const BUSINESS_CONFIG = {
 
   // Visual Branding Assets
   branding: {
-    logoPath: '/images/elite-logo.jpeg',
+    logoPath: '/images/elite-logo.png',
     shieldIconPath: '/images/elite-shield-icon.png',
     primaryColorHex: '#dc2626', // Flame Safety Red from logo
     darkBackgroundHex: '#0a0a0c', // Obsidian Dark from logo

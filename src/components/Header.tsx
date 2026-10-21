@@ -95,20 +95,18 @@ export const Header: React.FC<HeaderProps> = ({ onRequestQuote }) => {
       {/* Main Navigation Bar */}
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-white" aria-label="Main Navigation">
         <div className="flex justify-between items-center h-20 sm:h-22">
-          {/* Company Logo: Original Brand Asset Preserved with Exact Proportions */}
+          {/* Company Logo: Transparent Original Brand Asset with Exact Proportions */}
           <Link
             to="/"
             className="flex items-center gap-3 focus:outline-none focus:ring-2 focus:ring-safety-500 rounded-lg p-1"
             aria-label="Elite Fire and Protection Home"
           >
-            <div className="bg-[#0a0a0c] px-2.5 py-1.5 rounded-lg border border-slate-200 shadow-sm flex items-center">
-              <img
-                src={BUSINESS_CONFIG.branding.logoPath}
-                alt="Elite Fire and Protection - Safety, Protection, Reliability"
-                className="h-9 sm:h-11 md:h-12 w-auto object-contain transition-transform duration-200 hover:scale-[1.02]"
-                loading="eager"
-              />
-            </div>
+            <img
+              src={BUSINESS_CONFIG.branding.logoPath}
+              alt="Elite Fire and Protection - Safety, Protection, Reliability"
+              className="h-10 sm:h-12 md:h-14 w-auto object-contain transition-transform duration-200 hover:scale-[1.02]"
+              loading="eager"
+            />
           </Link>
 
           {/* Desktop Navigation Links */}
