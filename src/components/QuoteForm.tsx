@@ -31,26 +31,41 @@ const formSchema = z.object({
 
 interface QuoteFormProps {
   initialService?: string;
+  initialLocation?: string;
   onSuccess?: (leadId: string) => void;
   className?: string;
 }
 
 export const QuoteForm: React.FC<QuoteFormProps> = ({
   initialService = 'Fire Alarm Systems',
+  initialLocation = '',
   onSuccess,
   className = '',
 }) => {
+  const resolvedService = (VALID_SERVICES as readonly string[]).includes(initialService)
+    ? initialService
+    : 'Fire Alarm Systems';
+
   const [formData, setFormData] = useState({
     name: '',
     companyName: '',
     phone: '',
     email: '',
-    service: initialService,
-    location: '',
+    service: resolvedService,
+    location: initialLocation,
     message: '',
     preferredContactMethod: 'WhatsApp' as 'WhatsApp' | 'Phone Call' | 'Email',
     website_hp: '', // Honeypot field
   });
+
+  // Sync state if props change (e.g. modal re-opened with a different service or location)
+  React.useEffect(() => {
+    setFormData((prev) => ({
+      ...prev,
+      service: resolvedService,
+      ...(initialLocation ? { location: initialLocation } : {}),
+    }));
+  }, [resolvedService, initialLocation]);
 
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const [readyForWhatsApp, setReadyForWhatsApp] = useState<boolean>(false);
@@ -70,10 +85,11 @@ export const QuoteForm: React.FC<QuoteFormProps> = ({
     }
   };
 
-  const generateWhatsAppMessage = () => {
+  const generateWhatsAppMessage = (refId?: string) => {
+    const activeRefId = refId || quoteRefId;
     const lines = [
       `*NEW INQUIRY - ELITE FIRE AND PROTECTION*`,
-      `Reference ID: ${quoteRefId}`,
+      activeRefId ? `Reference ID: ${activeRefId}` : '',
       `---------------------------------------`,
       `*Full Name:* ${formData.name}`,
       formData.companyName ? `*Company/Facility:* ${formData.companyName}` : '',

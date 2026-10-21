@@ -7,12 +7,14 @@ interface QuoteModalProps {
   isOpen: boolean;
   onClose: () => void;
   serviceTitle?: string;
+  initialLocation?: string;
 }
 
 export const QuoteModal: React.FC<QuoteModalProps> = ({
   isOpen,
   onClose,
   serviceTitle = 'Fire Alarm Systems',
+  initialLocation = '',
 }) => {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -71,7 +73,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
 
         {/* Modal Form Body */}
         <div className="mt-4">
-          <QuoteForm initialService={serviceTitle} />
+          <QuoteForm initialService={serviceTitle} initialLocation={initialLocation} />
         </div>
       </div>
     </div>

@@ -41,9 +41,11 @@ function ScrollToTop() {
 export function App() {
   const [quoteModalOpen, setQuoteModalOpen] = useState(false);
   const [modalService, setModalService] = useState('Fire Alarm Systems');
+  const [modalLocation, setModalLocation] = useState('');
 
-  const handleOpenQuote = (serviceName?: string) => {
+  const handleOpenQuote = (serviceName?: string, locationName?: string) => {
     if (serviceName) setModalService(serviceName);
+    setModalLocation(locationName || '');
     setQuoteModalOpen(true);
   };
 
@@ -113,11 +115,11 @@ export function App() {
           {/* Local Area Service Pages */}
           <Route
             path="/locations/faridabad"
-            element={<FaridabadLocationPage onRequestQuote={() => handleOpenQuote('Faridabad Hub')} />}
+            element={<FaridabadLocationPage onRequestQuote={() => handleOpenQuote('Fire Fighting Systems', 'Faridabad')} />}
           />
           <Route
             path="/locations/delhi-ncr"
-            element={<DelhiNcrLocationPage onRequestQuote={() => handleOpenQuote('Delhi NCR')} />}
+            element={<DelhiNcrLocationPage onRequestQuote={() => handleOpenQuote('AMC and Maintenance Services', 'Delhi NCR')} />}
           />
 
           {/* Local Admin Leads Dashboard */}
@@ -136,6 +138,7 @@ export function App() {
         isOpen={quoteModalOpen}
         onClose={handleCloseQuote}
         serviceTitle={modalService}
+        initialLocation={modalLocation}
       />
 
       {/* Sticky Widgets */}
