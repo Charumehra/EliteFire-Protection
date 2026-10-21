@@ -28,16 +28,16 @@ export const BUSINESS_CONFIG = {
 
   // Contact Information (Centralized)
   phone: {
-    display: '+91 98XXX XXXXX',
-    raw: '+919800000000', // tel: format
-    isPlaceholder: true,
+    display: '+91 88261 11491',
+    raw: '+918826111491', // tel: format
+    isPlaceholder: false,
   },
   whatsapp: {
-    display: '+91 98XXX XXXXX',
-    raw: '919800000000', // Official international format without symbols
+    display: '+91 88261 11491',
+    raw: '918826111491', // Official international format without symbols
     defaultMessage:
       'Hello Elite Fire and Protection, I would like to enquire about your fire safety services in Faridabad/Delhi NCR. Please share details and quotation.',
-    isPlaceholder: true,
+    isPlaceholder: false,
   },
   email: {
     primary: 'contact@elitefireandprotection.in',

@@ -24,7 +24,7 @@ This checklist is prepared specifically for the business owner to claim, verify,
   - Add Service Areas: `Faridabad, Haryana`, `Gurugram, Haryana`, `New Delhi, Delhi`, `Noida, Uttar Pradesh`.
 
 ### Step 4: Contact & Website Linking
-- [ ] **Direct Phone Number:** Add the official business phone number (format: `+91 98XXX XXXXX`).
+- [ ] **Direct Phone Number:** Add the official business phone number: `+91 88261 11491`.
 - [ ] **Website URL:** Enter `https://elitefireandprotection.in/` (use the canonical HTTPS URL).
 - [ ] **Appointment Link:** Set to `https://elitefireandprotection.in/contact`.
 
