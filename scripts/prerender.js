@@ -188,6 +188,12 @@ async function prerender() {
     }
   }
 
+  // Clean up temporary SSR bundle after SSG is complete
+  const serverDir = path.resolve(distDir, 'server');
+  if (fs.existsSync(serverDir)) {
+    fs.rmSync(serverDir, { recursive: true, force: true });
+  }
+
   console.log(`\n🎉 SSG Prerendering complete! ${renderedCount} routes pre-rendered into clean static HTML.`);
 }
 
