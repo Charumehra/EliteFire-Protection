@@ -1,0 +1,21 @@
+{
+  "name": "elite-fire-and-protection",
+  "version": "1.0.0",
+  "description": "Production-ready static website with build-time SSG prerendering for Elite Fire and Protection, Faridabad & Delhi NCR",
+  "private": true,
+  "workspaces": [
+    "client"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace=client",
+    "build": "npm run build --workspace=client",
+    "preview": "npm run preview --workspace=client",
+    "test": "node client/scripts/test-static-routes.js"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

@@ -1,0 +1,12 @@
+# Robots.txt for Elite Fire and Protection
+# https://elitefireandprotection.in
+
+User-agent: *
+Allow: /
+
+# Disallow private admin interfaces
+Disallow: /admin/
+Disallow: /api/
+
+# Sitemap Location
+Sitemap: https://elitefireandprotection.in/sitemap.xml

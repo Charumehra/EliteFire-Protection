@@ -1,0 +1,103 @@
+/**
+ * Elite Fire and Protection - Centralized Business Configuration
+ *
+ * NOTE: For missing company information, clear placeholders are used.
+ * Never invent certifications, government approvals, or addresses.
+ */
+
+export interface ServiceArea {
+  name: string;
+  isPrimary: boolean;
+  description: string;
+  keyHubs: string[];
+}
+
+export const BUSINESS_CONFIG = {
+  name: 'Elite Fire and Protection',
+  legalName: 'Elite Fire and Protection Services',
+  tagline: 'Life Safety, Fire Protection & Facility Maintenance Solutions',
+
+  // Contact Information (Configurable Placeholders)
+  phone: {
+    display: '+91 98XXX XXXXX',
+    raw: '+919800000000', // tel: format
+    isPlaceholder: true,
+  },
+  whatsapp: {
+    display: '+91 98XXX XXXXX',
+    raw: '919800000000', // International number without symbols for WhatsApp api link
+    defaultMessage:
+      'Hello Elite Fire and Protection, I would like to enquire about your fire safety services in Faridabad/Delhi NCR. Please share details.',
+    isPlaceholder: true,
+  },
+  email: {
+    primary: 'contact@elitefireandprotection.in',
+    support: 'support@elitefireandprotection.in',
+    isPlaceholder: false,
+  },
+
+  // Operating Hours
+  hours: {
+    regular: 'Monday – Saturday: 9:00 AM – 7:00 PM',
+    sunday: 'Sunday: Emergency Service / By Appointment',
+    emergencyAvailabilityNote: 'Urgent breakdown support available for active AMC contract holders',
+  },
+
+  // Physical Location & Service Coverage
+  address: {
+    street: 'Plot No. [Pending Verification], Industrial Area',
+    city: 'Faridabad',
+    state: 'Haryana',
+    postalCode: '12100X',
+    country: 'India',
+    formatted: 'Industrial Area, Faridabad, Haryana 12100X, India',
+    isPlaceholder: true,
+  },
+
+  // Service Areas
+  serviceAreas: [
+    {
+      name: 'Faridabad',
+      isPrimary: true,
+      description: 'Primary operational hub covering industrial clusters, commercial belts, and residential sectors.',
+      keyHubs: [
+        'Sector 58 Industrial Area',
+        'Sector 59 Industrial Area',
+        'Sector 24 & 25 Industrial Area',
+        'IMT Faridabad',
+        'Mathura Road Commercial Corridor',
+        'Neharpar (Greater Faridabad)',
+        'NIT Faridabad',
+      ],
+    },
+    {
+      name: 'Delhi NCR',
+      isPrimary: false,
+      description: 'Selective service coverage for commercial complexes, corporate offices, and factories.',
+      keyHubs: [
+        'Okhla Industrial Area (Phases I, II, III)',
+        'Gurugram Commercial & Cyber City Hubs',
+        'Noida & Greater Noida Industrial Sectors',
+        'Mohan Cooperative Industrial Estate',
+        'South Delhi Commercial Facilities',
+      ],
+    },
+  ] as ServiceArea[],
+
+  // Standards and Practices Adhered To (Technical References)
+  technicalStandards: [
+    { code: 'IS 2190', label: 'Code of practice for selection, installation and maintenance of portable fire extinguishers' },
+    { code: 'IS 3844', label: 'Code of practice for installation of internal fire hydrants in high rise buildings' },
+    { code: 'IS 15105', label: 'Design and installation of fixed automatic sprinkler fire extinguishing systems' },
+    { code: 'IS 2189', label: 'Code of practice for selection, installation and maintenance of automatic fire detection and alarm system' },
+    { code: 'NBC 2016', label: 'National Building Code of India (Part 4: Fire and Life Safety)' },
+  ],
+
+  // Placeholder Notices
+  disclaimers: {
+    statutoryNotice:
+      'Elite Fire and Protection installs and services systems designed in accordance with relevant Indian Standards (IS Codes) and the National Building Code (NBC). Statutory Fire NOC issuance is subject to the sole jurisdiction of state fire service authorities.',
+    portfolioNotice:
+      'Case study layouts displayed illustrate typical project capabilities and equipment configurations. Specific past client references are furnished during formal proposal submissions upon mutual nondisclosure.',
+  },
+};
