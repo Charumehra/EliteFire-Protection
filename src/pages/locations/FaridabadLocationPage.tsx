@@ -43,8 +43,8 @@ export const FaridabadLocationPage: React.FC<Props> = ({ onRequestQuote }) => {
   return (
     <>
       <MetaTags
-        title="Fire Safety & Protection Services in Faridabad | Elite Fire"
-        description="Local fire alarm installation, fire hydrant systems, certified fire extinguisher refilling, and AMC services in Faridabad industrial areas (Sectors 58, 59, 24, 25, IMT)."
+        title="Fire Safety Services & Extinguisher Refilling in Faridabad | Elite Fire"
+        description="Certified fire safety contractor in Faridabad. Fire extinguisher refilling (IS 2190), hydrant systems, fire alarms (IS 2189) & AMC across Sectors 58, 59, 24, 25, IMT. Call 8826111491."
         canonicalPath="/locations/faridabad"
       />
       <StructuredData type="LocalBusiness" />

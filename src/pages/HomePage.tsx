@@ -9,6 +9,7 @@ import {
   Wrench,
   Phone,
   MessageCircle,
+  Mail,
   ArrowRight,
   ClipboardList,
   CheckCircle2,
@@ -73,37 +74,40 @@ export const HomePage: React.FC<HomePageProps> = ({ onRequestQuote }) => {
   return (
     <>
       <MetaTags
-        title="Fire Safety & Protection Solutions in Faridabad & Delhi NCR | Elite Fire"
-        description="Turnkey fire alarm systems, fire hydrants, automatic sprinklers, extinguisher refilling, electrical maintenance, CCTV, and AMC services in Faridabad & Delhi NCR."
+        title="Fire Safety Services & Fire Extinguisher Refilling in Faridabad | Elite Fire & Protection"
+        description="Top-rated fire safety services in Faridabad & Delhi NCR. Certified fire extinguisher refilling (IS 2190), fire alarm installation (IS 2189), hydrant systems, sprinklers & comprehensive AMC contracts. Fast on-site quote: 8826111491."
         canonicalPath="/"
       />
       <StructuredData type="LocalBusiness" />
       <StructuredData type="FAQPage" data={GENERAL_FAQS.slice(0, 5)} />
 
       {/* HERO SECTION */}
-      <section className="relative bg-[#0a0a0c] text-white overflow-hidden py-16 sm:py-24 lg:py-28 border-b-4 border-safety-600">
-        {/* Subtle geometric pattern overlay */}
-        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#dc2626_1px,transparent_1px)] [background-size:20px_20px] pointer-events-none" />
+      <section className="relative bg-[#090a0f] text-white overflow-hidden py-16 sm:py-24 lg:py-28 border-b-4 border-safety-600">
+        {/* Subtle radial lighting & engineering grid background */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(220,38,38,0.25),rgba(9,10,15,0))] pointer-events-none" />
+        <div className="absolute inset-0 opacity-[0.07] bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             {/* Left Content */}
             <div className="lg:col-span-7 space-y-6">
-              <div className="inline-flex items-center gap-2 bg-[#16161c] border border-safety-600/30 px-3.5 py-1.5 rounded-full text-xs font-bold text-safety-400">
-                <img
-                  src={BUSINESS_CONFIG.branding.shieldIconPath}
-                  alt="Elite Shield"
-                  className="w-4 h-4 object-contain"
-                />
-                <span>Life Safety & Fire Protection Engineers &bull; Faridabad & Delhi NCR</span>
+              {/* Live Status Pill */}
+              <div className="inline-flex items-center gap-2.5 bg-white/5 border border-white/10 px-3.5 py-1.5 rounded-full text-xs font-semibold backdrop-blur-md">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+                </span>
+                <span className="text-slate-300">
+                  Faridabad &amp; Delhi NCR On-Site Engineering Operations Active
+                </span>
               </div>
 
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white leading-tight">
-                Fire Safety and Protection Solutions in <span className="text-safety-500">Faridabad</span> and Delhi NCR
+                Fire Safety Services &amp; Fire Protection in <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-orange-400 to-red-400">Faridabad</span> &amp; Delhi NCR
               </h1>
 
               <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-2xl">
-                Turnkey fire alarm systems, water-based fire fighting installations, certified fire extinguisher refilling, industrial electrical panel safety, CCTV surveillance, and AMC maintenance for commercial and industrial facilities.
+                Certified fire alarm installations (<strong className="text-white font-medium">IS 2189</strong>), fire hydrant &amp; automatic sprinkler systems (<strong className="text-white font-medium">IS 3844</strong>), certified fire extinguisher refilling (<strong className="text-white font-medium">IS 2190</strong>), electrical panel thermography audits, CCTV, and annual maintenance contracts (AMC) for factories, warehouses, and commercial complexes.
               </p>
 
               {/* Direct CTAs */}
@@ -111,10 +115,10 @@ export const HomePage: React.FC<HomePageProps> = ({ onRequestQuote }) => {
                 <button
                   type="button"
                   onClick={onRequestQuote}
-                  className="bg-safety-600 hover:bg-safety-700 text-white font-bold text-xs sm:text-sm px-6 py-3.5 rounded-lg shadow-lg shadow-safety-900/40 transition-all duration-150 transform hover:-translate-y-0.5 flex items-center gap-2"
+                  className="bg-safety-600 hover:bg-safety-700 text-white font-bold text-xs sm:text-sm px-6 py-3.5 rounded-xl shadow-lg shadow-safety-900/50 transition-all duration-150 transform hover:-translate-y-0.5 flex items-center gap-2"
                 >
                   <ClipboardList className="w-4 h-4" />
-                  <span>Request a Quote</span>
+                  <span>Request Free Site Quote</span>
                 </button>
 
                 <a
@@ -122,40 +126,46 @@ export const HomePage: React.FC<HomePageProps> = ({ onRequestQuote }) => {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => trackConversion('whatsapp_click', { category: 'Hero', label: 'WhatsApp Hero CTA' })}
-                  className="bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-xs sm:text-sm px-5 py-3.5 rounded-lg shadow transition-all duration-150 flex items-center gap-2"
+                  className="bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-xs sm:text-sm px-5 py-3.5 rounded-xl shadow transition-all duration-150 flex items-center gap-2 transform hover:-translate-y-0.5"
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    className="w-4 h-4 flex-shrink-0"
-                  >
-                    <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.03-1.25-.75-.67-1.26-1.5-1.41-1.75-.15-.25-.02-.39.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.44.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.07-.12-.23-.19-.48-.31" />
-                  </svg>
+                  <MessageCircle className="w-4 h-4 fill-white" />
                   <span>WhatsApp Us</span>
                 </a>
 
                 <a
                   href={`tel:${BUSINESS_CONFIG.phone.raw}`}
                   onClick={() => trackConversion('phone_click', { category: 'Hero', label: 'Call Hero CTA' })}
-                  className="bg-white/10 hover:bg-white/15 text-slate-200 border border-slate-700 font-semibold text-xs sm:text-sm px-4 py-3.5 rounded-lg transition-colors flex items-center gap-2"
+                  className="bg-white/10 hover:bg-white/15 text-slate-200 border border-slate-700 font-semibold text-xs sm:text-sm px-4 py-3.5 rounded-xl transition-colors flex items-center gap-2"
                 >
                   <Phone className="w-4 h-4 text-safety-500" />
                   <span>Call {BUSINESS_CONFIG.phone.display}</span>
                 </a>
+
+                <a
+                  href={`mailto:${BUSINESS_CONFIG.email.primary}`}
+                  className="bg-white/5 hover:bg-white/10 text-slate-300 border border-slate-700/80 font-medium text-xs sm:text-sm px-4 py-3.5 rounded-xl transition-colors flex items-center gap-2"
+                  title="Direct Email Inquiries"
+                >
+                  <Mail className="w-4 h-4 text-safety-400" />
+                  <span>{BUSINESS_CONFIG.email.primary}</span>
+                </a>
               </div>
 
               {/* Verified Pillars */}
-              <div className="pt-6 border-t border-slate-800 grid grid-cols-2 sm:grid-cols-3 gap-4 text-xs text-slate-300">
+              <div className="pt-6 border-t border-slate-800/80 grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs text-slate-300">
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-safety-500 flex-shrink-0" />
-                  <span>NBC 2016 & IS Standards</span>
+                  <span>IS 2189 / IS 3844 Code</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-safety-500 flex-shrink-0" />
+                  <span>IS 2190 Refilling Testing</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-safety-500 flex-shrink-0" />
                   <span>Preventative AMC Support</span>
                 </div>
-                <div className="flex items-center gap-2 col-span-2 sm:col-span-1">
+                <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-safety-500 flex-shrink-0" />
                   <span>Transparent Itemized BOQ</span>
                 </div>
@@ -164,18 +174,42 @@ export const HomePage: React.FC<HomePageProps> = ({ onRequestQuote }) => {
 
             {/* Right Card: Quick Inquiry Card */}
             <div className="lg:col-span-5">
-              <div className="bg-white rounded-2xl shadow-2xl p-6 sm:p-7 border border-slate-200 text-slate-900">
+              <div className="bg-white rounded-2xl shadow-2xl p-6 sm:p-7 border border-slate-200 text-slate-900 relative">
+                <div className="absolute -top-3 right-6 bg-safety-600 text-white text-[10px] font-extrabold uppercase tracking-widest px-3 py-1 rounded-full shadow-md">
+                  Priority Response
+                </div>
                 <div className="mb-4">
                   <div className="inline-block text-[11px] font-bold text-safety-600 bg-red-50 border border-red-200 px-2.5 py-0.5 rounded uppercase tracking-wider mb-1">
-                    Direct Inquiry Desk
+                    Direct Engineering Desk
                   </div>
-                  <h2 className="text-lg font-bold text-navy-900">Request an On-Site Estimate</h2>
+                  <h2 className="text-lg font-bold text-navy-900">Get an On-Site Safety Estimate</h2>
                   <p className="text-xs text-slate-500 mt-0.5">
-                    For commercial, industrial & society installations in NCR
+                    For commercial, factory &amp; society installations across NCR
                   </p>
                 </div>
                 <QuoteForm initialService="Fire Alarm Systems" />
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* LOCAL SEO GEOGRAPHIC REACH BANNER */}
+      <section className="bg-[#0e0f16] border-b border-slate-800 text-white py-4 sm:py-5">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-3 text-center md:text-left">
+            <div className="flex items-center gap-2 text-xs font-bold text-slate-300 uppercase tracking-wider">
+              <Building2 className="w-4 h-4 text-safety-500" />
+              <span>Key Local Service Belts:</span>
+            </div>
+            <div className="flex flex-wrap items-center justify-center md:justify-end gap-2 text-xs text-slate-300">
+              <span className="bg-white/5 border border-white/10 px-2.5 py-1 rounded-md">Sector 58 Industrial Area</span>
+              <span className="bg-white/5 border border-white/10 px-2.5 py-1 rounded-md">Sector 59 Industrial Area</span>
+              <span className="bg-white/5 border border-white/10 px-2.5 py-1 rounded-md">Sector 24 &amp; 25 Manufacturing</span>
+              <span className="bg-white/5 border border-white/10 px-2.5 py-1 rounded-md">IMT Faridabad</span>
+              <span className="bg-white/5 border border-white/10 px-2.5 py-1 rounded-md">Mathura Road Belt</span>
+              <span className="bg-white/5 border border-white/10 px-2.5 py-1 rounded-md">Neharpar Greater Faridabad</span>
+              <span className="bg-white/5 border border-white/10 px-2.5 py-1 rounded-md">Delhi NCR / Okhla / Gurugram</span>
             </div>
           </div>
         </div>
@@ -338,6 +372,18 @@ export const HomePage: React.FC<HomePageProps> = ({ onRequestQuote }) => {
                     <h3 className="text-sm font-bold text-navy-900">Direct Faridabad & Delhi NCR Response</h3>
                     <p className="text-xs text-slate-600 mt-1">
                       Located directly in Faridabad, our field teams provide rapid response across Sector 58, 59, 24, 25, IMT, Mathura Road, and surrounding NCR industrial zones.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3.5">
+                  <div className="w-8 h-8 rounded-lg bg-red-100 text-safety-600 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <ShieldCheck className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-bold text-navy-900">Fire NOC & Statutory Audit Readiness</h3>
+                    <p className="text-xs text-slate-600 mt-1">
+                      Full technical documentation, as-built schematics, hydrostatic testing certificates, and inspection compliance support for Haryana Fire Department approvals.
                     </p>
                   </div>
                 </div>
@@ -581,7 +627,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onRequestQuote }) => {
             <button
               type="button"
               onClick={onRequestQuote}
-              className="bg-safety-600 hover:bg-safety-700 text-white font-bold text-xs sm:text-sm px-6 py-3.5 rounded-lg shadow-lg transition-transform transform hover:-translate-y-0.5"
+              className="bg-safety-600 hover:bg-safety-700 text-white font-bold text-xs sm:text-sm px-6 py-3.5 rounded-xl shadow-lg transition-transform transform hover:-translate-y-0.5"
             >
               Request a Detailed Quote
             </button>
@@ -589,17 +635,17 @@ export const HomePage: React.FC<HomePageProps> = ({ onRequestQuote }) => {
               href={getWhatsAppUrl()}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-xs sm:text-sm px-6 py-3.5 rounded-lg shadow transition-colors flex items-center gap-2"
+              className="bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-xs sm:text-sm px-6 py-3.5 rounded-xl shadow transition-colors flex items-center gap-2"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                className="w-4 h-4 flex-shrink-0"
-              >
-                <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.03-1.25-.75-.67-1.26-1.5-1.41-1.75-.15-.25-.02-.39.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.44.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.07-.12-.23-.19-.48-.31" />
-              </svg>
+              <MessageCircle className="w-4 h-4 fill-white" />
               <span>WhatsApp Engineering Desk</span>
+            </a>
+            <a
+              href={`mailto:${BUSINESS_CONFIG.email.primary}`}
+              className="bg-white/10 hover:bg-white/15 text-white font-bold text-xs sm:text-sm px-6 py-3.5 rounded-xl border border-slate-700 transition-colors flex items-center gap-2"
+            >
+              <Mail className="w-4 h-4 text-safety-400" />
+              <span>Email {BUSINESS_CONFIG.email.primary}</span>
             </a>
           </div>
         </div>

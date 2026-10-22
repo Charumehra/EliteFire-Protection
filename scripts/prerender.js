@@ -10,8 +10,8 @@ const serverEntryPath = path.resolve(distDir, 'server/entry-server.js');
 const ROUTES = [
   {
     path: '/',
-    title: 'Fire Safety and Protection Solutions in Faridabad & Delhi NCR | Elite Fire',
-    description: 'Commercial fire alarm systems, fire fighting installations, fire extinguisher refilling, electrical maintenance, CCTV, and AMC services in Faridabad & Delhi NCR.',
+    title: 'Fire Safety Services & Fire Extinguisher Refilling in Faridabad | Elite Fire & Protection',
+    description: 'Top-rated fire safety services in Faridabad & Delhi NCR. Certified fire extinguisher refilling (IS 2190), fire alarm installation (IS 2189), hydrant systems, sprinklers & comprehensive AMC contracts. Fast on-site quote: 8826111491.',
   },
   {
     path: '/about',
@@ -115,8 +115,8 @@ const ROUTES = [
   },
   {
     path: '/locations/faridabad',
-    title: 'Fire Safety & Protection Services in Faridabad | Elite Fire',
-    description: 'Local fire alarm installation, fire hydrant systems, certified fire extinguisher refilling, and AMC services in Faridabad industrial areas (Sectors 58, 59, 24, 25, IMT).',
+    title: 'Fire Safety Services & Extinguisher Refilling in Faridabad | Elite Fire',
+    description: 'Certified fire safety contractor in Faridabad. Fire extinguisher refilling (IS 2190), hydrant systems, fire alarms (IS 2189) & AMC across Sectors 58, 59, 24, 25, IMT. Call 8826111491.',
   },
   {
     path: '/locations/delhi-ncr',

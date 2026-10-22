@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import {
   Phone,
   MessageCircle,
+  Mail,
   Menu,
   X,
   ChevronDown,
@@ -69,6 +70,15 @@ export const Header: React.FC<HeaderProps> = ({ onRequestQuote }) => {
           </div>
 
           <div className="flex items-center gap-4">
+            <a
+              href={`mailto:${BUSINESS_CONFIG.email.primary}`}
+              className="hidden lg:flex items-center gap-1.5 text-slate-700 hover:text-safety-600 font-semibold transition-colors"
+              title="Email Elite Fire Engineering Desk"
+            >
+              <Mail className="w-3.5 h-3.5 text-safety-600" />
+              <span>{BUSINESS_CONFIG.email.primary}</span>
+            </a>
+            <span className="hidden lg:inline text-slate-300">|</span>
             <a
               href={`tel:${BUSINESS_CONFIG.phone.raw}`}
               onClick={handlePhoneClick}
@@ -340,6 +350,13 @@ export const Header: React.FC<HeaderProps> = ({ onRequestQuote }) => {
               >
                 <Phone className="w-4 h-4 text-safety-600" />
                 Call {BUSINESS_CONFIG.phone.display}
+              </a>
+              <a
+                href={`mailto:${BUSINESS_CONFIG.email.primary}`}
+                className="w-full text-center py-2.5 px-4 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold text-xs flex items-center justify-center gap-2 border border-slate-200 transition-colors"
+              >
+                <Mail className="w-4 h-4 text-safety-600" />
+                Email {BUSINESS_CONFIG.email.primary}
               </a>
               <a
                 href={getWhatsAppUrl()}

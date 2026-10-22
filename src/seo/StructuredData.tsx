@@ -21,10 +21,14 @@ export const StructuredData: React.FC<StructuredDataProps> = ({ type = 'LocalBus
       '@type': 'LocalBusiness',
       name: BUSINESS_CONFIG.name,
       legalName: BUSINESS_CONFIG.legalName,
-      description: BUSINESS_CONFIG.tagline,
+      description: `${BUSINESS_CONFIG.tagline} - Top-rated fire safety services, fire extinguisher refilling, alarm installations, and AMC in Faridabad & Delhi NCR.`,
       url: SITE_URL,
+      image: `${SITE_URL}/images/elite-logo.png`,
+      logo: `${SITE_URL}/images/elite-logo.png`,
       telephone: BUSINESS_CONFIG.phone.display,
       email: BUSINESS_CONFIG.email.primary,
+      currenciesAccepted: 'INR',
+      paymentAccepted: 'Cash, Credit Card, Bank Transfer, Cheque, UPI',
       address: {
         '@type': 'PostalAddress',
         streetAddress: BUSINESS_CONFIG.address.street,
@@ -57,6 +61,66 @@ export const StructuredData: React.FC<StructuredDataProps> = ({ type = 'LocalBus
         },
       ],
       priceRange: '₹₹ - ₹₹₹',
+      knowsAbout: [
+        'Fire Safety Services',
+        'Fire Extinguisher Refilling IS 2190',
+        'Addressable Fire Alarm Systems IS 2189',
+        'Fire Fighting Hydrant Systems IS 3844',
+        'Automatic Fire Sprinklers IS 15105',
+        'Fire Safety AMC Contracts',
+        'Electrical Panel Thermography Audits',
+        'Industrial CCTV Installation',
+        'NBC 2016 Part 4 Compliance',
+        'Faridabad Haryana Fire NOC Liaison',
+      ],
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'Fire Protection and Safety Services',
+        itemListElement: [
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Fire Alarm Systems Installation & Testing (IS 2189)',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Fire Fighting Hydrant & Sprinkler Systems (IS 3844)',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Fire Extinguisher Supply, Refilling & Hydro-Testing (IS 2190)',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Electrical Panel Maintenance & Thermography Safety Audit',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Commercial CCTV Surveillance Systems Installation',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Annual Maintenance Contracts (AMC) for Fire Safety',
+            },
+          },
+        ],
+      },
     };
   } else if (type === 'Service' && data) {
     schemaContent = {
