@@ -40,8 +40,8 @@ export const BUSINESS_CONFIG = {
     isPlaceholder: false,
   },
   email: {
-    primary: 'elitefireprotection@gmail.com',
-    support: 'elitefireprotection@gmail.com',
+    primary: 'elitefireprotection29@gmail.com',
+    support: 'elitefireprotection29@gmail.com',
     isPlaceholder: false,
   },
 
